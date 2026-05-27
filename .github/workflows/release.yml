@@ -33,8 +33,10 @@ jobs:
           poetry-version: '2.1.4'
 
       - name: Setup a local virtual environment
+        env:
+          PYTHON_PATH: ${{ steps.setup-python.outputs.python-path }}
         run: |
-          poetry env use ${{ steps.setup-python.outputs.python-path }}
+          poetry env use "$PYTHON_PATH"
           poetry run python --version
           poetry config virtualenvs.create true --local
           poetry config virtualenvs.in-project true --local
